@@ -10,29 +10,35 @@ function ResultScreen({ score, totalQuestions, onRestart }) {
   
   if (percentage === 100) {
     message = "パーフェクト！🎉";
-    subMessage = "素晴らしい起業リテラシーです！自信を持って進めましょう！";
+    subMessage = "素晴らしい副業・在宅ワークリテラシーです！自信を持って進めましょう！";
   } else if (percentage >= 70) {
-    message = "素晴らしい！🌟";
-    subMessage = "起業への準備がしっかりできています。あと一息ですね！";
+    if (score >= 9) {
+      message = "素晴らしいリテラシーです！自信を持って副業をスタートさせましょう！";
+      subMessage = "あなたの知識は十分です！";
+    } else if (score >= 6) {
+      message = "副業への準備がしっかりできています。あと一息ですね！";
+      subMessage = "重要なポイントをもう一度確認してみましょう！";
+    } else {
+      message = "伸びしろたっぷり！🌱";
+      subMessage = "これから副業や在宅ワークについてしっかり学んでいきましょう！";
+    }
   } else if (percentage >= 40) {
     message = "惜しい！💪";
     subMessage = "基礎知識はあります。重要なポイントをもう一度復習してみましょう！";
   } else {
     message = "伸びしろたっぷり！🌱";
-    subMessage = "これから起業についてしっかり学んでいきましょう！";
+    subMessage = "これから副業や在宅ワークについてしっかり学んでいきましょう！";
   }
 
   // SNS Share functions
   const shareOnX = () => {
-    const text = encodeURIComponent(`看護師のための起業準備クイズで【${score}/${totalQuestions}点】でした！\n${message}\n\nあなたの起業力をチェック👇\n`);
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    const tweetText = encodeURIComponent(`看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！\n\n${message}\n\nあなたの副業力をチェック👇\nhttps://nurse-startup-quiz.vercel.app\n#看護師副業 #在宅ワーク #フリーランス`);
+    window.open(`https://twitter.com/intent/tweet?text=${tweetText}`, '_blank');
   };
 
   const shareOnLine = () => {
-    const text = encodeURIComponent(`看護師のための起業準備クイズで【${score}/${totalQuestions}点】でした！あなたの起業力をチェック👇\n`);
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank');
+    const lineText = encodeURIComponent(`看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！\n\n${message}\n\nあなたの副業力をチェック👇\nhttps://nurse-startup-quiz.vercel.app`);
+    window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent("https://nurse-startup-quiz.vercel.app")}&text=${lineText}`, '_blank');
   };
 
   return (
@@ -62,7 +68,7 @@ function ResultScreen({ score, totalQuestions, onRestart }) {
         <div className="conversion-section">
           <h4 className="conversion-title">さらに詳しく学びたい方へ</h4>
           <p className="conversion-text">
-            起業に向けた具体的なステップや役立つ情報を配信中！<br/>
+            副業に向けた具体的なステップや役立つ情報を配信中！<br/>
             ぜひ公式LINEにご登録ください。
           </p>
           <a href={LINE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-line-official glow-effect">

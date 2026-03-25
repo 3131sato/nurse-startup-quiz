@@ -4,18 +4,18 @@ function StartScreen({ onStart }) {
   return (
     <div className="screen start-screen">
       <div className="card">
-        <h1 className="title">看護師のための<br/>起業準備クイズ</h1>
-        <p className="subtitle">あなたの起業力をチェック！</p>
+        <h1 className="title">看護師のための<br/>副業・在宅ワーク準備クイズ</h1>
+        <p className="subtitle">あなたのフリーランス力をチェック！</p>
         
         <div className="description">
           <p>
-            看護師が起業・独立を目指すために必要な知識を
+            看護師が副業からフリーランスを目指すために必要な知識を
             <strong>10問のクイズ形式</strong>で楽しく学べます。
           </p>
           <ul className="feature-list">
-            <li>✅ 開業届や資金計画</li>
-            <li>✅ マーケティングの基礎</li>
-            <li>✅ 関連法規の注意点</li>
+            <li>✅ 副業の種類や始め方</li>
+            <li>✅ マーケティング・商品作りの基礎</li>
+            <li>✅ SNS用語やアルゴリズムの解説</li>
           </ul>
         </div>
 

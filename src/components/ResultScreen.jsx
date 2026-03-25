@@ -31,9 +31,9 @@ function ResultScreen({ score, totalQuestions, onRestart }) {
   }
 
   // SNS Share functions
-  const shareOnX = () => {
-    const tweetText = encodeURIComponent(`看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！\n\n${message}\n\nあなたの副業力をチェック👇\nhttps://nurse-startup-quiz.vercel.app\n#看護師副業 #在宅ワーク #フリーランス`);
-    window.open(`https://twitter.com/intent/tweet?text=${tweetText}`, '_blank');
+  const shareOnThreads = () => {
+    const text = encodeURIComponent(`看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！\n\n${message}\n\nあなたの副業力をチェック👇\nhttps://nurse-startup-quiz.vercel.app\n#看護師副業 #在宅ワーク #フリーランス`);
+    window.open(`https://www.threads.net/intent/post?text=${text}`, '_blank');
   };
 
   const shareOnLine = () => {
@@ -60,7 +60,7 @@ function ResultScreen({ score, totalQuestions, onRestart }) {
         <div className="share-section">
           <p className="share-text">結果をシェアする</p>
           <div className="share-buttons">
-            <button className="btn btn-x" onClick={shareOnX}>𝕏 でシェア</button>
+            <button className="btn btn-x" onClick={shareOnThreads}>Threads でシェア</button>
             <button className="btn btn-line-share" onClick={shareOnLine}>LINE でシェア</button>
           </div>
         </div>

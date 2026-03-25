@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ProgressBar from './ProgressBar';
 
 function QuizScreen({ questions, onFinish }) {
@@ -6,18 +6,25 @@ function QuizScreen({ questions, onFinish }) {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
+  // useRef で常に最新スコアを同期管理（stale closure 回避）
+  const scoreRef = useRef(0);
 
   const question = questions[currentQuestionIndex];
   const totalQuestions = questions.length;
 
   const handleOptionClick = (index) => {
-    if (isAnswered) return; // Prevent multiple clicks
+    if (isAnswered) return;
 
     setSelectedOption(index);
     setIsAnswered(true);
 
     if (index === question.correctIndex) {
-      setScore(score + 1);
+      // functional update で常に最新値を参照
+      setScore(prev => {
+        const newScore = prev + 1;
+        scoreRef.current = newScore;
+        return newScore;
+      });
     }
   };
 
@@ -27,7 +34,8 @@ function QuizScreen({ questions, onFinish }) {
       setSelectedOption(null);
       setIsAnswered(false);
     } else {
-      onFinish(score + (selectedOption === question.correctIndex ? 1 : 0));
+      // scoreRef.current は最新の確定済みスコアを持つ（二重加算なし）
+      onFinish(scoreRef.current);
     }
   };
 

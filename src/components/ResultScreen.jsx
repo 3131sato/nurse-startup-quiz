@@ -30,10 +30,20 @@ function ResultScreen({ score, totalQuestions, onRestart }) {
     subMessage = "これから副業や在宅ワークについてしっかり学んでいきましょう！";
   }
 
+  // Threads用に絵文字なしバージョンのメッセージを別途用意
+  const plainMessage = message.replace(/[\u{1F000}-\u{1FFFF}]/gu, '').trim();
+
   // SNS Share functions
   const shareOnThreads = () => {
-    const text = encodeURIComponent(`看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！\n\n${message}\n\nあなたの副業力をチェック👇\nhttps://nurse-startup-quiz.vercel.app\n#看護師副業 #在宅ワーク #フリーランス`);
-    window.open(`https://www.threads.net/intent/post?text=${text}`, '_blank');
+    // Threads URLエンコード後の文字化け回避のため、絵文字を含むメッセージは除外
+    const shareText = [
+      `看護師のための副業・在宅ワーク準備クイズで ${score}/10点 でした！`,
+      plainMessage,
+      'あなたの副業力をチェック↓',
+      'https://nurse-startup-quiz.vercel.app',
+      '#看護師副業 #在宅ワーク #フリーランス'
+    ].join('\n');
+    window.open(`https://www.threads.net/intent/post?text=${encodeURIComponent(shareText)}`, '_blank');
   };
 
   const shareOnLine = () => {
